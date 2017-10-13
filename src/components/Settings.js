@@ -41,9 +41,8 @@ class SettingsForm extends React.Component {
   componentWillMount() {
     if (this.props.currentUser) {
       Object.assign(this.state, {
-        image: this.props.currentUser.image || '',
+        image: this.props.currentUser.avatar_url || '',
         name: this.props.currentUser.name,
-        bio: this.props.currentUser.bio,
         email: this.props.currentUser.email
       })
     }
@@ -52,9 +51,8 @@ class SettingsForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
-        image: nextProps.currentUser.image || '',
+        image: nextProps.currentUser.avatar_url || '',
         name: nextProps.currentUser.name,
-        bio: nextProps.currentUser.bio,
         email: nextProps.currentUser.email
       }))
     }
@@ -70,7 +68,7 @@ class SettingsForm extends React.Component {
               className="form-control"
               type="text"
               placeholder="URL of profile picture"
-              value={this.state.image}
+              value={this.state.avatar_url}
               onChange={this.updateState('image')} />
           </fieldset>
 
