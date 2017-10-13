@@ -39,19 +39,19 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.article-page .comment-form .card-block {
+.idea-page .comment-form .card-block {
   padding: 22px;
 }
 
-.article-meta {
+.idea-meta {
   margin: 15px auto 30px;
 }
 
-.article-meta .info .author {
+.idea-meta .info .author {
   padding-bottom: 7px;
 }
 
-.article-content {
+.idea-content {
   padding: 40px 80px;
 }
 

@@ -2,12 +2,12 @@ import {
   APP_LOAD,
   REDIRECT,
   LOGOUT,
-  ARTICLE_SUBMITTED,
+  IDEA_SUBMITTED,
   SETTINGS_SAVED,
   LOGIN,
   REGISTER,
-  DELETE_ARTICLE,
-  ARTICLE_PAGE_UNLOADED,
+  DELETE_IDEA,
+  IDEA_PAGE_UNLOADED,
   EDITOR_PAGE_UNLOADED,
   HOME_PAGE_UNLOADED,
   PROFILE_PAGE_UNLOADED,
@@ -35,7 +35,7 @@ export default (state = defaultState, action) => {
       return { ...state, redirectTo: null }
     case LOGOUT:
       return { ...state, redirectTo: '/home', token: null, currentUser: null }
-    case ARTICLE_SUBMITTED:
+    case IDEA_SUBMITTED:
       const redirectUrl = '/home'
       return { ...state, redirectTo: redirectUrl }
     case SETTINGS_SAVED:
@@ -49,12 +49,12 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         redirectTo: action.error ? null : '/home',
-        token: action.error ? null : action.payload.user.token,
+        token: action.error ? null : action.payload.jwt,
         currentUser: action.error ? null : action.payload.user
       }
-    case DELETE_ARTICLE:
+    case DELETE_IDEA:
       return { ...state, redirectTo: '/home' }
-    case ARTICLE_PAGE_UNLOADED:
+    case IDEA_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:
     case PROFILE_PAGE_UNLOADED:

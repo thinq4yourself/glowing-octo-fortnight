@@ -14,7 +14,7 @@ class SettingsForm extends React.Component {
 
     this.state = {
       image: '',
-      username: '',
+      name: '',
       bio: '',
       email: '',
       password: ''
@@ -42,7 +42,7 @@ class SettingsForm extends React.Component {
     if (this.props.currentUser) {
       Object.assign(this.state, {
         image: this.props.currentUser.image || '',
-        username: this.props.currentUser.username,
+        name: this.props.currentUser.name,
         bio: this.props.currentUser.bio,
         email: this.props.currentUser.email
       })
@@ -53,7 +53,7 @@ class SettingsForm extends React.Component {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
         image: nextProps.currentUser.image || '',
-        username: nextProps.currentUser.username,
+        name: nextProps.currentUser.name,
         bio: nextProps.currentUser.bio,
         email: nextProps.currentUser.email
       }))
@@ -78,9 +78,9 @@ class SettingsForm extends React.Component {
             <input
               className="form-control form-control-lg"
               type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.updateState('username')} />
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.updateState('name')} />
           </fieldset>
 
           <fieldset className="form-group">

@@ -5,7 +5,7 @@ import { APP_LOAD, REDIRECT, LOGOUT } from '../constants/actionTypes'
 import { Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import Article from '../components/Article'
+import Idea from '../components/Idea'
 import Editor from '../components/Editor'
 import Home from '../components/Home'
 import Login from '../components/Login'
@@ -69,10 +69,10 @@ class App extends React.Component {
                   <Route path='/register' component={Register} />
                   <Route path='/editor/:slug' component={Editor} />
                   <Route path='/editor' component={Editor} />
-                  <Route path='/article/:id' component={Article} />
+                  <Route path='/idea/:id' component={Idea} />
                   <Route path='/settings' component={Settings} />
-                  <Route path='/@:username/favorites' component={ProfileFavorites} />
-                  <Route path='/@:username' component={Profile} />
+                  <Route path='/@:name/favorites' component={ProfileFavorites} />
+                  <Route path='/@:name' component={Profile} />
                   </Switch>
               </div>
             </div>

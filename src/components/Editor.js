@@ -7,7 +7,7 @@ import {
   ADD_TAG,
   EDITOR_PAGE_LOADED,
   REMOVE_TAG,
-  ARTICLE_SUBMITTED,
+  IDEA_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes'
@@ -33,7 +33,7 @@ const initialValues = [
 
 const cleanInput = inputValue => {
   // Strip all non-number characters from the input
-  return inputValue.replace(/[^0-9]/g, "");
+  return inputValue.replace(/[^0-9]/g, "")
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
   onRemoveTag: tag =>
     dispatch({ type: REMOVE_TAG, tag }),
   onSubmit: payload =>
-    dispatch({ type: ARTICLE_SUBMITTED, payload }),
+    dispatch({ type: IDEA_SUBMITTED, payload }),
   onUnload: payload =>
     dispatch({ type: EDITOR_PAGE_UNLOADED }),
   onUpdateField: (key, value) =>
@@ -75,17 +75,17 @@ class Editor extends React.Component {
 
     this.submitForm = ev => {
       ev.preventDefault()
-      const article = {
+      const idea = {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
         tagList: this.props.tagList
       }
 
-      const slug = { slug: this.props.articleSlug }
-      const promise = this.props.articleSlug ?
-        agent.Articles.update(Object.assign(article, slug)) :
-        agent.Articles.create(article)
+      const slug = { slug: this.props.ideaSlug }
+      const promise = this.props.ideaSlug ?
+        agent.Ideas.update(Object.assign(idea, slug)) :
+        agent.Ideas.create(idea)
 
       this.props.onSubmit(promise)
     }
@@ -95,7 +95,7 @@ class Editor extends React.Component {
     if (this.props.match.params.slug !== nextProps.match.params.slug) {
       if (nextProps.match.params.slug) {
         this.props.onUnload()
-        return this.props.onLoad(agent.Articles.get(this.props.match.params.slug))
+        return this.props.onLoad(agent.Ideas.get(this.props.match.params.slug))
       }
       this.props.onLoad(null)
     }
@@ -103,7 +103,7 @@ class Editor extends React.Component {
 
   componentWillMount() {
     if (this.props.match.params.slug) {
-      return this.props.onLoad(agent.Articles.get(this.props.match.params.slug))
+      return this.props.onLoad(agent.Ideas.get(this.props.match.params.slug))
     }
     this.props.onLoad(null)
   }
@@ -142,7 +142,7 @@ class Editor extends React.Component {
                     <input
                       className='form-control form-control-lg'
                       type='text'
-                      placeholder='Article Title'
+                      placeholder='Idea Title'
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>

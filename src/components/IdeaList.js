@@ -1,18 +1,18 @@
-import ArticlePreview from './ArticlePreview'
+import IdeaPreview from './IdeaPreview'
 import ListPagination from './ListPagination'
 import React from 'react'
 
-const ArticleList = props => {
-  if (!props.articles) {
+const IdeaList = props => {
+  if (!props.ideas) {
     return (
-      <div className="article-preview">Loading...</div>
+      <div className="idea-preview">Loading...</div>
     )
   }
 
-  if (props.articles.length === 0) {
+  if (props.ideas.length === 0) {
     return (
-      <div className="article-preview">
-        No articles are here... yet.
+      <div className="idea-preview">
+        No ideas are here... yet.
       </div>
     )
   }
@@ -28,19 +28,19 @@ const ArticleList = props => {
         <div className='col-sm-3'></div>
       </div>
       {
-        props.articles.map(article => {
+        props.ideas.map(idea => {
           return (
-            <ArticlePreview article={article} key={article.slug} />
+            <IdeaPreview idea={idea} key={idea.slug} />
           )
         })
       }
 
       <ListPagination
         pager={props.pager}
-        articlesCount={props.articlesCount}
+        ideasCount={props.ideasCount}
         currentPage={props.currentPage} />
     </div>
   )
 }
 
-export default ArticleList
+export default IdeaList
