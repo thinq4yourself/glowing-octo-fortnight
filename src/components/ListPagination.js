@@ -14,7 +14,7 @@ const ListPagination = props => {
   }
 
   const range = [];
-  for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) {
+  for (let i = 0; i < Math.ceil((props.articlesCount / 2.15) / 10); ++i) {
     range.push(i);
   }
 

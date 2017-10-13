@@ -17,7 +17,7 @@ import {
 } from '../constants/actionTypes'
 
 const defaultState = {
-  appName: 'My Articles',
+  appName: 'My Ideas',
   token: null,
   viewChangeCounter: 0
 }
@@ -36,7 +36,7 @@ export default (state = defaultState, action) => {
     case LOGOUT:
       return { ...state, redirectTo: '/home', token: null, currentUser: null }
     case ARTICLE_SUBMITTED:
-      const redirectUrl = `/article/${action.payload.article.slug}`
+      const redirectUrl = '/home'
       return { ...state, redirectTo: redirectUrl }
     case SETTINGS_SAVED:
       return {

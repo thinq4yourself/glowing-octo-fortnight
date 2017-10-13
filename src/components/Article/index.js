@@ -41,7 +41,7 @@ class Article extends React.Component {
     return (
       <div className="article-page">
 
-        <div className="banner">
+        <div className=" jumbotron">
           <div className="container-fluid">
 
             <h1>{this.props.article.title}</h1>
@@ -54,10 +54,10 @@ class Article extends React.Component {
 
         <div className="page">
 
-          <div className="row article-content">
-            <div className="col-xs-12">
+          <div className="article-content">
+            <div className="">
 
-              <div dangerouslySetInnerHTML={markup}></div>
+              <p dangerouslySetInnerHTML={markup}></p>
 
               <ul className="tag-list">
                 {
@@ -81,7 +81,7 @@ class Article extends React.Component {
           <div className="article-actions">
           </div>
 
-          <div className="row">
+          <div className="">
             <CommentContainer
               comments={this.props.comments || []}
               errors={this.props.commentErrors}

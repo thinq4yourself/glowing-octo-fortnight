@@ -43,6 +43,18 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
   padding: 22px;
 }
 
+.article-meta {
+  margin: 15px auto 30px;
+}
+
+.article-meta .info .author {
+  padding-bottom: 7px;
+}
+
+.article-content {
+  padding: 40px 80px;
+}
+
 .left-sidebar {
   display: none;
 }
@@ -84,16 +96,7 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
 }
 
 .main {
-  padding: 20px;
-}
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
-.main .page-header {
-  margin-top: 0;
+  padding: 0;
 }
 
 .sidebar-avatar {
@@ -107,3 +110,56 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+@media (min-width: 544px) {
+  .modal-dialog {
+      max-width: 400px;
+      margin: 188px auto;
+  }
+  .modal-dialog .padded {
+    margin: 30px auto 90px auto;
+  }
+}
+
+.tag-list {
+  float: right;
+}
+
+.jumbotron {
+  border-radius: 0 !important;
+}
+
+.btn-pad-right {
+  margin-right: 22px;
+}
+
+.btn-link-default {
+  color: #666 !important;
+}
+
+.navbar-brand {
+  padding-top: 1.5rem !important;
+  color: inherit !important;
+}
+
+.add-idea img {
+  width: 50px;
+  height: 50px;
+}
+
+.nav>li>.add-idea:focus, .nav>li>a.add-idea:hover {
+  background-color: transparent !important;
+}
+
+.pagination>li>a, .pagination>li>span {
+  color: #00A843;
+}
+
+.no-hover:hover {background: transparent; color: #3d8b3d;}

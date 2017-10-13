@@ -1,9 +1,10 @@
 import agent from '../agent'
-import Header from './Header'
 import React from 'react'
 import { connect } from 'react-redux'
 import { APP_LOAD, REDIRECT, LOGOUT } from '../constants/actionTypes'
 import { Route, Switch } from 'react-router-dom'
+import Header from './Header'
+import Sidebar from './Sidebar'
 import Article from '../components/Article'
 import Editor from '../components/Editor'
 import Home from '../components/Home'
@@ -14,7 +15,6 @@ import Register from '../components/Register'
 import Settings from '../components/Settings'
 import { store } from '../store'
 import { push } from 'react-router-redux'
-import { Link } from 'react-router-dom'
 import './App.css'
 
 const mapStateToProps = state => {
@@ -56,34 +56,7 @@ class App extends React.Component {
       return (
         <div className='container-fluid'>
           <div className='row'>
-            <nav className='col-sm-3 col-md-2 left-sidebar'>
-              <div className='center-block sidebar-logo'>
-                <img src='/images/logo.svg' className="sidebar-avatar" alt={this.props.currentUser.username} />
-                <br />
-                <Link
-                  to='/home'
-                  className="nav-link center-block">
-                  The Idea Pool
-                </Link>
-              </div>
-              <div className='center-block'>
-                <Link
-                  to={`/@${this.props.currentUser.username}`}
-                  className="nav-link center-block">
-                  <img src={this.props.currentUser.image} className="sidebar-avatar" alt={this.props.currentUser.username} />
-                </Link><br />
-                <Link
-                  to={`/@${this.props.currentUser.username}`}
-                  className="nav-link center-block">
-                  {this.props.currentUser.username}
-                </Link><br /><br />
-                <button
-                  onClick={this.props.onClickLogout}
-                  className="btn btn-outline-success">
-                  Logout
-                </button>
-              </div>
-            </nav>
+            <Sidebar currentUser={this.props.currentUser} />
             <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
               <div>
                 <Header
