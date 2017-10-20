@@ -39,12 +39,12 @@ const LoggedInView = props => {
           <Link
             to='/settings'
             className="nav-link center-block">
-            <img src={props.currentUser.image} className="sidebar-avatar" alt={props.currentUser.username} />
+            <img src={props.currentUser.image} className="sidebar-avatar" alt={props.currentUser.name} />
           </Link><br />
           <Link
             to='/settings'
             className="nav-link center-block">
-            {props.currentUser.username}
+            {props.currentUser.name}
           </Link><br /><br />
           <button
             onClick={props.onClickLogout}

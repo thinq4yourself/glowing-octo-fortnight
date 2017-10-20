@@ -1,19 +1,19 @@
 import {
-  ARTICLE_PAGE_LOADED,
-  ARTICLE_PAGE_UNLOADED,
+  IDEA_PAGE_LOADED,
+  IDEA_PAGE_UNLOADED,
   ADD_COMMENT,
   DELETE_COMMENT
 } from '../constants/actionTypes'
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case ARTICLE_PAGE_LOADED:
+    case IDEA_PAGE_LOADED:
       return {
         ...state,
-        article: action.payload[0].article,
+        IDEA: action.payload[0].IDEA,
         comments: action.payload[1].comments
       }
-    case ARTICLE_PAGE_UNLOADED:
+    case IDEA_PAGE_UNLOADED:
       return {}
     case ADD_COMMENT:
       return {

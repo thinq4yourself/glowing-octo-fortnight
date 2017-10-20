@@ -1,17 +1,17 @@
-import superagentPromise from 'superagent-promise';
-import _superagent from 'superagent';
+import superagentPromise from 'superagent-promise'
+import _superagent from 'superagent'
 
-const superagent = superagentPromise(_superagent, global.Promise);
+const superagent = superagentPromise(_superagent, global.Promise)
 
-const API_ROOT = 'https://conduit.productionready.io/api';
+const API_ROOT = 'https://small-project-api.herokuapp.com'
 
-const encode = encodeURIComponent;
-const responseBody = res => res.body;
+const encode = encodeURIComponent
+const responseBody = res => res.body
 
-let token = null;
+let token = null
 const tokenPlugin = req => {
   if (token) {
-    req.set('authorization', `Token ${token}`);
+    req.set('x-access-token', `${token}`)
   }
 }
 
@@ -24,73 +24,46 @@ const requests = {
     superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
     superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
-};
+}
 
 const Auth = {
   current: () =>
-    requests.get('/user'),
+    requests.get('/me'),
   login: (email, password) =>
-    requests.post('/users/login', { user: { email, password } }),
-  register: (username, email, password) =>
-    requests.post('/users', { user: { username, email, password } }),
+    requests.post('/access-tokens', { email, password }),
+  register: (name, email, password) =>
+    requests.post('/users', { name, email, password }),
   save: user =>
-    requests.put('/user', { user })
-};
+    requests.put('/users', { user }),
+  refresh: () =>
+    requests.put('/access-tokens/refresh'),
+  logout: () =>
+    requests.del('/access-tokens')
+}
 
-const Tags = {
-  getAll: () => requests.get('/tags')
-};
-
-const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-const omitSlug = article => Object.assign({}, article, { slug: undefined })
-const Articles = {
+const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`
+const omitSlug = idea => Object.assign({}, idea, { slug: undefined })
+const Ideas = {
   all: page =>
-    requests.get(`/articles?${limit(5, page)}`),
-  byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
-  byTag: (tag, page) =>
-    requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
+    requests.get(`/ideas?${limit(5, page)}`),
   del: slug =>
-    requests.del(`/articles/${slug}`),
-  favorite: slug =>
-    requests.post(`/articles/${slug}/favorite`),
-  favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
-  feed: () =>
-    requests.get('/articles/feed?limit=10&offset=0'),
+    requests.del(`/ideas/${slug}`),
   get: slug =>
-    requests.get(`/articles/${slug}`),
-  unfavorite: slug =>
-    requests.del(`/articles/${slug}/favorite`),
-  update: article =>
-    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: article =>
-    requests.post('/articles', { article })
-};
-
-const Comments = {
-  create: (slug, comment) =>
-    requests.post(`/articles/${slug}/comments`, { comment }),
-  delete: (slug, commentId) =>
-    requests.del(`/articles/${slug}/comments/${commentId}`),
-  forArticle: slug =>
-    requests.get(`/articles/${slug}/comments`)
-};
+    requests.get(`/ideas/${slug}`),
+  update: idea =>
+    requests.put(`/ideas/${idea.slug}`, { idea: omitSlug(idea) }),
+  create: idea =>
+    requests.post('/ideas', { idea })
+}
 
 const Profile = {
-  follow: username =>
-    requests.post(`/profiles/${username}/follow`),
-  get: username =>
-    requests.get(`/profiles/${username}`),
-  unfollow: username =>
-    requests.del(`/profiles/${username}/follow`)
-};
+  get: name =>
+    requests.get('/me')
+}
 
 export default {
-  Articles,
+  Ideas,
   Auth,
-  Comments,
   Profile,
-  Tags,
-  setToken: _token => { token = _token; }
-};
+  setToken: _token => { token = _token }
+}

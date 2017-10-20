@@ -1,21 +1,21 @@
-import Banner from './Banner';
-import MainView from './MainView';
-import React from 'react';
-import agent from '../../agent';
-import { connect } from 'react-redux';
+import Banner from './Banner'
+import MainView from './MainView'
+import React from 'react'
+import agent from '../../agent'
+import { connect } from 'react-redux'
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
-} from '../../constants/actionTypes';
+} from '../../constants/actionTypes'
 
-const Promise = global.Promise;
+const Promise = global.Promise
 
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
   token: state.common.token
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
@@ -24,18 +24,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () =>
     dispatch({  type: HOME_PAGE_UNLOADED })
-});
+})
 
 class Home extends React.Component {
   componentWillMount() {
-    const tab = 'all';
-    const articlesPromise = agent.Articles.all;
+    const tab = 'all'
+    const ideasPromise = agent.Ideas.all
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    this.props.onLoad(tab, ideasPromise, Promise.all([ideasPromise()]))
   }
 
   componentWillUnmount() {
-    this.props.onUnload();
+    this.props.onUnload()
   }
 
   render() {
@@ -51,8 +51,8 @@ class Home extends React.Component {
         </div>
 
       </div>
-    );
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

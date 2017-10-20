@@ -1,10 +1,10 @@
-import ArticleList from '../ArticleList';
+import IdeaList from '../IdeaList';
 import React from 'react';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state.articleList,
+  ...state.ideaList,
   tags: state.home.tags,
   token: state.common.token
 });
@@ -20,11 +20,11 @@ const MainView = props => {
         <ul className="nav nav-pills outline-active" />
       </div>
 
-      <ArticleList
+      <IdeaList
         pager={props.pager}
-        articles={props.articles}
+        ideas={props.ideas}
         loading={props.loading}
-        articlesCount={props.articlesCount}
+        ideasCount={props.ideasCount}
         currentPage={props.currentPage} />
     </div>
   );

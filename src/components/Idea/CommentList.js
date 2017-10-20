@@ -1,5 +1,5 @@
-import Comment from './Comment';
-import React from 'react';
+import Comment from './Comment'
+import React from 'react'
 
 const CommentList = props => {
   return (
@@ -12,11 +12,11 @@ const CommentList = props => {
               currentUser={props.currentUser}
               slug={props.slug}
               key={comment.id} />
-          );
+          )
         })
       }
     </div>
-  );
-};
+  )
+}
 
-export default CommentList;
+export default CommentList

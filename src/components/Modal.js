@@ -1,42 +1,42 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { spring, Motion, TransitionMotion, presets } from 'react-motion';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+import { spring, Motion, TransitionMotion, presets } from 'react-motion'
 
-const modalRoot = document.getElementById('modal-root');
+const modalRoot = document.getElementById('modal-root')
 
 class Modal extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     show: PropTypes.bool.isRequired,
     onHide: PropTypes.func.isRequired
-  };
+  }
 
   constructor(props) {
-    super(props);
-    this.state = { dialog: [{ key: 'k1' }] };
-    this.el = document.createElement('div');
+    super(props)
+    this.state = { dialog: [{ key: 'k1' }] }
+    this.el = document.createElement('div')
   }
 
   componentDidMount() {
-    modalRoot.appendChild(this.el);
+    modalRoot.appendChild(this.el)
   }
 
   componentWillUnmount() {
-    modalRoot.removeChild(this.el);
+    modalRoot.removeChild(this.el)
   }
 
   getDefaultStyles = () => {
-    const { dialog } = this.state;
-    const { show } = this.props;
-    if (!show) return [];
-    return dialog.map(modal => ({ ...modal, style: { marginTop: -250, opacity: 0 } }));
-  };
+    const { dialog } = this.state
+    const { show } = this.props
+    if (!show) return []
+    return dialog.map(modal => ({ ...modal, style: { marginTop: -250, opacity: 0 } }))
+  }
 
   getStyles = () => {
-    const { dialog } = this.state;
-    const { show } = this.props;
-    if (!show) return [];
+    const { dialog } = this.state
+    const { show } = this.props
+    if (!show) return []
     return dialog.map((modal) => {
       return {
         ...modal,
@@ -44,32 +44,32 @@ class Modal extends Component {
           marginTop: spring(0, presets.stiff),
           opacity: spring(1, presets.stiff)
         }
-      };
-    });
-  };
+      }
+    })
+  }
 
   willEnter = () => {
     return {
       marginTop: -250,
       opacity: 0
-    };
+    }
   }
 
   willLeave = () => {
     return {
       marginTop: spring(-250, { stiffness: 200, damping: 40 })
-    };
+    }
   }
 
   handleDialogClick = (e) => {
     if (e.target !== e.currentTarget) {
-      return;
+      return
     }
-    this.props.onHide();
+    this.props.onHide()
   }
 
   render() {
-    const { show } = this.props;
+    const { show } = this.props
     return ReactDOM.createPortal(
       <div>
         {show ? (
@@ -77,7 +77,7 @@ class Modal extends Component {
             {(stuff) => {
               return (
                 <div style={{ opacity: stuff.x }} className="modal-backdrop" />
-              );
+              )
             }}
           </Motion>
         ) : null}
@@ -110,14 +110,14 @@ class Modal extends Component {
                       </div>
                     </div>
                   </div>
-                );
+                )
               })}
             </div>
           )}
         </TransitionMotion>
       </div>, this.el,
-      );
+      )
   }
 }
 
-export default Modal;
+export default Modal

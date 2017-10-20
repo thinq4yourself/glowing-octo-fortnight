@@ -1,11 +1,11 @@
-import DeleteButton from './DeleteButton';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import DeleteButton from './DeleteButton'
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 const Comment = props => {
-  const comment = props.comment;
+  const comment = props.comment
   const show = props.currentUser &&
-    props.currentUser.username === comment.author.username;
+    props.currentUser.name === comment.author.name
   return (
     <div className="card">
       <div className="card-block">
@@ -13,15 +13,15 @@ const Comment = props => {
       </div>
       <div className="card-footer">
         <Link
-          to={`/@${comment.author.username}`}
+          to={`/@${comment.author.name}`}
           className="comment-author">
-          <img src={comment.author.image} className="comment-author-img" alt={comment.author.username} />
+          <img src={comment.author.image} className="comment-author-img" alt={comment.author.name} />
         </Link>
-        &nbsp;
+        &nbsp
         <Link
-          to={`/@${comment.author.username}`}
+          to={`/@${comment.author.name}`}
           className="comment-author">
-          {comment.author.username}
+          {comment.author.name}
         </Link>
         <span className="date-posted">
           {new Date(comment.createdAt).toDateString()}
@@ -29,7 +29,7 @@ const Comment = props => {
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Comment;
+export default Comment

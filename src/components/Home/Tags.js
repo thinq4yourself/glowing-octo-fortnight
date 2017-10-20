@@ -1,17 +1,17 @@
-import React from 'react';
-import agent from '../../agent';
+import React from 'react'
+import agent from '../../agent'
 
 const Tags = props => {
-  const tags = props.tags;
+  const tags = props.tags
   if (tags) {
     return (
       <div className="tag-list">
         {
           tags.map(tag => {
             const handleClick = ev => {
-              ev.preventDefault();
-              props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
-            };
+              ev.preventDefault()
+              props.onClickTag(tag, page => agent.Ideas.byTag(tag, page), agent.Ideas.byTag(tag))
+            }
 
             return (
               <a
@@ -21,16 +21,16 @@ const Tags = props => {
                 onClick={handleClick}>
                 {tag}
               </a>
-            );
+            )
           })
         }
       </div>
-    );
+    )
   } else {
     return (
       <div>Loading Tags...</div>
-    );
+    )
   }
-};
+}
 
-export default Tags;
+export default Tags

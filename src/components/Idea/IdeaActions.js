@@ -2,26 +2,26 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import agent from '../../agent'
 import { connect } from 'react-redux'
-import { DELETE_ARTICLE } from '../../constants/actionTypes'
+import { DELETE_IDEA } from '../../constants/actionTypes'
 import Modal from '../Modal'
 
 const mapDispatchToProps = dispatch => ({
   onClickDelete: payload =>
-    dispatch({ type: DELETE_ARTICLE, payload })
+    dispatch({ type: DELETE_IDEA, payload })
 })
 
-class ArticleActions extends React.Component {
+class IdeaActions extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false
     }
   }
   render () {
-    const article = this.props.article
+    const idea = this.props.idea
     const { open } = this.state
     const del = () => {
-      this.props.onClickDelete(agent.Articles.del(article.slug))
+      this.props.onClickDelete(agent.Ideas.del(idea.slug))
     }
     const onConfirm = () => {
       del()
@@ -36,7 +36,7 @@ class ArticleActions extends React.Component {
         <span>
 
           <Link
-            to={`/editor/${article.slug}`}
+            to={`/editor/${idea.slug}`}
             className="btn btn-outline-primary btn-sm btn-pad-right" style={{ border: '0' }}>
             <i className="ion-edit"></i>
           </Link>
@@ -74,4 +74,4 @@ class ArticleActions extends React.Component {
 
 }
 
-export default connect(() => ({}), mapDispatchToProps)(ArticleActions)
+export default connect(() => ({}), mapDispatchToProps)(IdeaActions)

@@ -1,30 +1,30 @@
-import { Profile, mapStateToProps } from './Profile';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import { Profile, mapStateToProps } from './Profile'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import agent from '../agent'
+import { connect } from 'react-redux'
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from '../constants/actionTypes'
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) =>
     dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
   onUnload: () =>
     dispatch({ type: PROFILE_PAGE_UNLOADED })
-});
+})
 
 class ProfileFavorites extends Profile {
   componentWillMount() {
-    this.props.onLoad(page => agent.Articles.favoritedBy(this.props.match.params.username, page), Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Articles.favoritedBy(this.props.match.params.username)
-    ]));
+    this.props.onLoad(page => agent.Ideas.favoritedBy(this.props.match.params.name, page), Promise.all([
+      agent.Profile.get(this.props.match.params.name),
+      agent.Ideas.favoritedBy(this.props.match.params.name)
+    ]))
   }
 
   componentWillUnmount() {
-    this.props.onUnload();
+    this.props.onUnload()
   }
 
   renderTabs() {
@@ -33,21 +33,21 @@ class ProfileFavorites extends Profile {
         <li className="nav-item">
           <Link
             className="nav-link"
-            to={`/@${this.props.profile.username}`}>
-            My Articles
+            to={`/@${this.props.profile.name}`}>
+            My Ideas
           </Link>
         </li>
 
         <li className="nav-item">
           <Link
             className="nav-link active"
-            to={`/@${this.props.profile.username}/favorites`}>
-            Favorited Articles
+            to={`/@${this.props.profile.name}/favorites`}>
+            Favorited Ideas
           </Link>
         </li>
       </ul>
-    );
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites)
